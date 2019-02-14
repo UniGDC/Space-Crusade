@@ -12,11 +12,11 @@ public class playerMovement : MonoBehaviour
 
         if (Input.GetKey("w"))
         {
-            playerPosition.y += moveSpeed * Time.deltaTime;
+            playerPosition.z += moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey("s"))
         {
-            playerPosition.y -= moveSpeed * Time.deltaTime;
+            playerPosition.z -= moveSpeed * Time.deltaTime;
         }
         if (Input.GetKey("d"))
         {

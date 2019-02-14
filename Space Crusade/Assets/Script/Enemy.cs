@@ -15,8 +15,12 @@ public class Enemy : MonoBehaviour {
     {
         agent = GetComponent<NavMeshAgent>();
 
-        agent.SetDestination(player.transform.position);
         
+        
+    }
+    private void FixedUpdate()
+    {
+        agent.SetDestination(player.transform.position);
     }
     public void TakeDamage (int damage)
 	{

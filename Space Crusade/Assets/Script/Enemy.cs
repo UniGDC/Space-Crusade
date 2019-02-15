@@ -18,9 +18,23 @@ public class Enemy : MonoBehaviour {
         
         
     }
-    private void FixedUpdate()
+    private void Update()
     {
-        agent.SetDestination(player.transform.position);
+        float distance = Vector3.Distance(this.transform.position, player.transform.position);
+        if(distance >= 2f)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(player.transform.position);
+            
+        }
+        else
+        {
+            agent.isStopped = true;
+            Debug.Log("ATTACK!!!!");
+        }
+
+        
+
     }
     public void TakeDamage (int damage)
 	{

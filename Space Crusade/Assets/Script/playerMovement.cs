@@ -6,7 +6,7 @@ public class playerMovement : MonoBehaviour
 {
     public float moveSpeed;
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 playerPosition = transform.position;
 

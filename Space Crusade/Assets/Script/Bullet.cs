@@ -7,12 +7,14 @@ public class Bullet : MonoBehaviour {
     float timer = 10f;
     public float speed = 20f;
 	public int damage = 40;
-	public Rigidbody2D rb;
+	public Rigidbody rb;
 	public GameObject impactEffect;
+    public Collider collid;
 
 	// Use this for initialization
 	void Start () {
 		rb.velocity = transform.right * speed;
+        collid = GetComponent<BoxCollider>();
 	}
 
     private void Update()
@@ -24,11 +26,13 @@ public class Bullet : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
-    void OnTriggerEnter2D (Collider2D hitInfo)
+    void OnTriggerEnter (Collider hitInfo)
 	{
-		Enemy enemy = hitInfo.GetComponent<Enemy>();
+        Enemy enemy = hitInfo.gameObject.GetComponent<Enemy>();
+
 		if (enemy != null)
 		{
+            Debug.Log("enemyHit");
             
 			enemy.TakeDamage(damage);
 		}
@@ -38,5 +42,6 @@ public class Bullet : MonoBehaviour {
 
 		Destroy(gameObject);
 	}
+
 	
 }

@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour {
     private void Update()
     {
         float distance = Vector3.Distance(this.transform.position, player.transform.position);
-        if(distance >= 2f)
+        if(distance >= 3f)
         {
             agent.isStopped = false;
             agent.SetDestination(player.transform.position);
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour {
     public void TakeDamage (int damage)
 	{
 		health -= damage;
-
+        Debug.Log("damage taken");
 		if (health <= 0)
 		{
 			Die();

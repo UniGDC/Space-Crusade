@@ -8,8 +8,11 @@ public class Enemy : MonoBehaviour {
 	public int health = 100;
     private NavMeshAgent agent;
     public GameObject player;
+    public Player playerScript;
 
-	public GameObject deathEffect;
+    public float damageCounter = 0f;
+
+    public GameObject deathEffect;
 
     private void Start()
     {
@@ -25,12 +28,22 @@ public class Enemy : MonoBehaviour {
         {
             agent.isStopped = false;
             agent.SetDestination(player.transform.position);
-            
+            damageCounter = 0f;
         }
         else
         {
+            damageCounter -= Time.deltaTime;
             agent.isStopped = true;
-            Debug.Log("ATTACK!!!!");
+            if (damageCounter <= 0f)
+            {
+                Attack();
+                Debug.Log("ATTACK!!!!");
+                damageCounter = 2f;
+
+            }
+            
+            
+            
         }
 
         
@@ -45,6 +58,11 @@ public class Enemy : MonoBehaviour {
 			Die();
 		}
 	}
+
+    void Attack()
+    {
+        playerScript.takeDamage(10);
+    }
 
 	void Die ()
 	{

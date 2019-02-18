@@ -8,6 +8,7 @@ public class RayCastShooting : MonoBehaviour {
 	public int damage = 40;
 	//public GameObject impactEffect;
 	public LineRenderer lineRenderer;
+    
 	
 	// Update is called once per frame
 	void Update () {

@@ -1,74 +1,62 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class Enemy : MonoBehaviour {
+public class enemy : MonoBehaviour
+{
+	public float speed;
+	public float stoppingDistance;
 
-	public int health = 100;
-    private NavMeshAgent agent;
-    public GameObject player;
-    public Player playerScript;
+	public float health;
+	public Player playerScript;
+	public float damageCounter = 0f;
+	public GameObject deathEffect;
 
-    public float damageCounter = 0f;
-
-    public GameObject deathEffect;
-
-    private void Start()
+	private GameObject player;
+    // Start is called before the first frame update
+    void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-
-        
+		player = GameObject.FindGameObjectWithTag("Player");
         
     }
-    private void Update()
+
+    // Update is called once per frame
+    void FixedUpdate()
     {
-        float distance = Vector3.Distance(this.transform.position, player.transform.position);
-        if(distance >= 3f)
-        {
-            agent.isStopped = false;
-            agent.SetDestination(player.transform.position);
-            damageCounter = 0f;
-        }
-        else
-        {
-            damageCounter -= Time.deltaTime;
-            agent.isStopped = true;
-            if (damageCounter <= 0f)
-            {
-                Attack();
-                Debug.Log("ATTACK!!!!");
-                damageCounter = 2f;
-
-            }
-            
-            
-            
-        }
-
-        
+		damageCounter -= Time.deltaTime;
+		if (Vector2.Distance(transform.position, player.transform.position) > stoppingDistance)
+		{
+			transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+		}
+		else if (damageCounter <= 0)
+		{
+			Attack();
+			damageCounter = 3f;
+		}
 
     }
-    public void TakeDamage (int damage)
+
+	public void TakeDamage(int damage)
 	{
 		health -= damage;
-        Debug.Log("damage taken");
+		Debug.Log("damage taken");
 		if (health <= 0)
 		{
 			Die();
 		}
 	}
 
-    void Attack()
-    {
-        playerScript.takeDamage(10);
-    }
-
-	void Die ()
+	void Attack()
 	{
-        Debug.Log("enemy dead");
+		playerScript.takeDamage(10);
+	}
+
+	void Die()
+	{
+		Debug.Log("enemy dead");
 		//Instantiate(deathEffect, transform.position, Quaternion.identity);
 		Destroy(gameObject);
 	}
+
 
 }

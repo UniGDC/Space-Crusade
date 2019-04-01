@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour {
+public class bullet : MonoBehaviour {
 
-    float timer = 10f;
+	
+	float timer = 5f;
     public float speed = 20f;
 	public int damage = 40;
-	public Rigidbody rb;
+	public Rigidbody2D rb;
 	public GameObject impactEffect;
-    public Collider collid;
+    public Collider2D collid;
 
 	// Use this for initialization
 	void Start () {
 		rb.velocity = transform.right * speed;
-        collid = GetComponent<BoxCollider>();
 	}
 
     private void Update()
@@ -26,15 +26,17 @@ public class Bullet : MonoBehaviour {
             Destroy(this.gameObject);
         }
     }
-    void OnTriggerEnter (Collider hitInfo)
+    void OnTriggerEnter2D(Collider2D hitInfo)
 	{
-        Enemy enemy = hitInfo.gameObject.GetComponent<Enemy>();
+		Debug.Log(hitInfo.name);
 
-		if (enemy != null)
+        enemy enemyRef = hitInfo.gameObject.GetComponent<enemy>();
+
+		if (enemyRef != null)
 		{
             Debug.Log("enemyHit");
             
-			enemy.TakeDamage(damage);
+			enemyRef.TakeDamage(damage);
 		}
 
         Debug.Log("explode!!!");
@@ -43,5 +45,4 @@ public class Bullet : MonoBehaviour {
 		Destroy(gameObject);
 	}
 
-	
 }

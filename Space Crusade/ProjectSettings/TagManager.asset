@@ -4,9 +4,7 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - wall
-  - noLight
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -16,10 +14,10 @@ TagManager:
   - UI
   - 
   - 
-  - PostProcessing
-  - lightIgnore
-  - notWalkable
   - player
+  - enemy
+  - bullet
+  - 
   - 
   - 
   - 
@@ -43,4 +41,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: background
+    uniqueID: 138663273
+    locked: 0
+  - name: enemy
+    uniqueID: 4080157633
+    locked: 0
+  - name: player
+    uniqueID: 2735490611
     locked: 0

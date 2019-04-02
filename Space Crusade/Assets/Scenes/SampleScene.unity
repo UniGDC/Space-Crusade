@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7620626ec4c730448901b7a2d7d002f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeStrenth: 0.5
+  shakeStrenth: 0.25
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -18631,7 +18631,7 @@ GameObject:
   - component: {fileID: 1379237061}
   - component: {fileID: 1379237060}
   m_Layer: 0
-  m_Name: backGround
+  m_Name: _backGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

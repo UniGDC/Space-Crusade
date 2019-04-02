@@ -9,7 +9,7 @@ public class enemy : MonoBehaviour
 
 	public float health;
 	public Player playerScript;
-	public float damageCounter = 0f;
+	public float damageCounter = 0.0f;
 	public GameObject deathEffect;
 
 	private GameObject playerObj;
@@ -29,10 +29,10 @@ public class enemy : MonoBehaviour
 		{
 			transform.position = Vector2.MoveTowards(transform.position, playerObj.transform.position, speed * Time.deltaTime);
 		}
-		else if (damageCounter <= 0)
+		else if (damageCounter <= 0.0f)
 		{
 			Attack();
-			damageCounter = 3f;
+			damageCounter = 3.0f;
 		}
 
     }

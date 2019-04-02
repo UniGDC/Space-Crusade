@@ -7,8 +7,11 @@ public class Player : MonoBehaviour
 {
     public int health = 100;
 	public Slider slider;
-    // Start is called before the first frame update
-    void Start()
+
+	public GameObject[] thingsToDisable;
+	public GameObject[] thingsToEnable;
+	// Start is called before the first frame update
+	void Start()
     {
         
     }
@@ -30,5 +33,14 @@ public class Player : MonoBehaviour
     void die()
     {
         Debug.Log("died");
-    }
+		for (int i = 0; i < thingsToEnable.Length; i++)
+		{		
+			thingsToEnable[i].SetActive(true);
+		}
+		//for (int i = 0; i < thingsToDisable.Length; i++)
+		//{
+		//	thingsToDisable[i-1].SetActive(false);
+		//	thingsToEnable[i].SetActive(true);
+		//}
+	}
 }

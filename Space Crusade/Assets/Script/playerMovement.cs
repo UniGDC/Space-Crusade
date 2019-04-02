@@ -5,34 +5,69 @@ using UnityEngine;
 public class playerMovement : MonoBehaviour
 {
 	public float moveSpeed;
+	public float diagMoveSpeed;
 	public Animator playerAnimator;
 
+	public GameObject playerGraphics;
 	void FixedUpdate()
 	{
 
-
+		
 		Vector3 playerPosition = transform.position;
 
-		if (Input.GetKey("w"))
+		if (Input.GetKey("w") && !Input.GetKey("d") && !Input.GetKey("a"))
 		{
 			playerPosition.y += moveSpeed * Time.fixedDeltaTime;
 
 		}
-		if (Input.GetKey("s"))
+		if (Input.GetKey("s") && !Input.GetKey("d") && !Input.GetKey("a"))
 		{
 			playerPosition.y -= moveSpeed * Time.fixedDeltaTime;
 
 		}
-		if (Input.GetKey("d"))
+		if (Input.GetKey("d") && !Input.GetKey("w") && !Input.GetKey("s"))
 		{
 			playerPosition.x += moveSpeed * Time.fixedDeltaTime;
+			playerGraphics.transform.localScale = new Vector3(1f, 1f, 1f);
 
 		}
-		if (Input.GetKey("a"))
+		if (Input.GetKey("a") && !Input.GetKey("w") && !Input.GetKey("s"))
 		{
 			playerPosition.x -= moveSpeed * Time.fixedDeltaTime;
+			playerGraphics.transform.localScale = new Vector3(-1f, 1f, 1f);
 
 		}
+
+
+
+
+
+
+		if (Input.GetKey("w") && Input.GetKey("d"))
+		{
+			playerPosition.y += diagMoveSpeed * Time.fixedDeltaTime;
+			playerPosition.x += diagMoveSpeed * Time.fixedDeltaTime;
+			playerGraphics.transform.localScale = new Vector3(1f, 1f, 1f);
+		}
+		if (Input.GetKey("w") && Input.GetKey("a"))
+		{
+			playerPosition.y += diagMoveSpeed * Time.fixedDeltaTime;
+			playerPosition.x -= diagMoveSpeed * Time.fixedDeltaTime;
+			playerGraphics.transform.localScale = new Vector3(-1f, 1f, 1f);
+		}
+		if (Input.GetKey("s") && Input.GetKey("d"))
+		{
+			playerPosition.y -= diagMoveSpeed * Time.fixedDeltaTime;
+			playerPosition.x += diagMoveSpeed * Time.fixedDeltaTime;
+			playerGraphics.transform.localScale = new Vector3(1f, 1f, 1f);
+		}
+		if (Input.GetKey("s") && Input.GetKey("a"))
+		{
+			playerPosition.y -= diagMoveSpeed * Time.fixedDeltaTime;
+			playerPosition.x -= diagMoveSpeed * Time.fixedDeltaTime;
+			playerGraphics.transform.localScale = new Vector3(-1f, 1f, 1f);
+		}
+
 
 		transform.position = playerPosition;
 	}

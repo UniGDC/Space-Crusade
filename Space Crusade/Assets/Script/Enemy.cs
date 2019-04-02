@@ -12,21 +12,22 @@ public class enemy : MonoBehaviour
 	public float damageCounter = 0f;
 	public GameObject deathEffect;
 
-	private GameObject player;
+	private GameObject playerObj;
     // Start is called before the first frame update
     void Start()
     {
-		player = GameObject.FindGameObjectWithTag("Player");
-        
-    }
+		playerObj = GameObject.FindGameObjectWithTag("Player");
+		playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+	}
 
     // Update is called once per frame
     void FixedUpdate()
     {
 		damageCounter -= Time.deltaTime;
-		if (Vector2.Distance(transform.position, player.transform.position) > stoppingDistance)
+		if (Vector2.Distance(transform.position, playerObj.transform.position) > stoppingDistance)
 		{
-			transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
+			transform.position = Vector2.MoveTowards(transform.position, playerObj.transform.position, speed * Time.deltaTime);
 		}
 		else if (damageCounter <= 0)
 		{

@@ -45,10 +45,9 @@ public class spawner : MonoBehaviour
 
 	public IEnumerator spawnEnemy(int enemiesToSpawn)
 	{
-		
-		randomNum = Mathf.RoundToInt(Random.Range(0f, spawnPoint.Length - 1f));
 		for (int i = 0; i < enemiesToSpawn; i++)
 		{
+			randomNum = Mathf.RoundToInt(Random.Range(0f, spawnPoint.Length - 1f));
 			Instantiate(enemyObj[0], spawnPoint[randomNum].transform);
 			yield return new WaitForSeconds(spawnOffset);
 		}

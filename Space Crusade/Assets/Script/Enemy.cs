@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class enemy : MonoBehaviour
 {
@@ -12,9 +13,14 @@ public class enemy : MonoBehaviour
 	public float damageCounter = 0.0f;
 	public GameObject deathEffect;
 
+	public AudioSource attackSound;
+
+
 	private GameObject playerObj;
-    // Start is called before the first frame update
-    void Start()
+
+	public Slider healthBar;
+	// Start is called before the first frame update
+	void Start()
     {
 		playerObj = GameObject.FindGameObjectWithTag("Player");
 		playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -24,6 +30,7 @@ public class enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+		healthBar.value = health / 100f;
 		damageCounter -= Time.deltaTime;
 		if (Vector2.Distance(transform.position, playerObj.transform.position) > stoppingDistance)
 		{
@@ -34,8 +41,7 @@ public class enemy : MonoBehaviour
 			Attack();
 			damageCounter = 3.0f;
 		}
-
-    }
+	}
 
 	public void TakeDamage(int damage)
 	{
@@ -43,20 +49,23 @@ public class enemy : MonoBehaviour
 		Debug.Log("damage taken");
 		if (health <= 0)
 		{
-			Die();
+				Die();
 		}
 	}
 
 	void Attack()
 	{
 		playerScript.takeDamage(10);
+		attackSound.Play();
 	}
 
 	void Die()
 	{
+		
 		Debug.Log("enemy dead");
 		//Instantiate(deathEffect, transform.position, Quaternion.identity);
 		Destroy(gameObject);
+
 	}
 
 

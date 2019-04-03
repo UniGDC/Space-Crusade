@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
     public int health = 100;
-	public Slider slider;
+	public Slider healthBar;
 
 	public GameObject[] thingsToDisable;
 	public GameObject[] thingsToEnable;
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		slider.value = health/100f;
+		healthBar.value = health/100f;
         if(health <= 0)
         {
             die();
@@ -37,10 +37,10 @@ public class Player : MonoBehaviour
 		{		
 			thingsToEnable[i].SetActive(true);
 		}
-		//for (int i = 0; i < thingsToDisable.Length; i++)
-		//{
-		//	thingsToDisable[i-1].SetActive(false);
-		//	thingsToEnable[i].SetActive(true);
-		//}
+		for (int i = 0; i < thingsToDisable.Length; i++)
+		{
+			thingsToDisable[i].SetActive(false);
+		}
+		this.gameObject.SetActive(false);
 	}
 }

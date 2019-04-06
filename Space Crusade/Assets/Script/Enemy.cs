@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class enemy : MonoBehaviour
@@ -8,6 +6,7 @@ public class enemy : MonoBehaviour
 	public float speed;
 	public float stoppingDistance;
 
+	public int score;
 	public float health;
 	public Player playerScript;
 	public float damageCounter = 0.0f;
@@ -15,6 +14,7 @@ public class enemy : MonoBehaviour
 
 	public AudioSource attackSound;
 
+	public scoreCounter scoreCounterRef;
 
 	private GameObject playerObj;
 
@@ -24,7 +24,7 @@ public class enemy : MonoBehaviour
     {
 		playerObj = GameObject.FindGameObjectWithTag("Player");
 		playerScript = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
+		scoreCounterRef = GameObject.Find("_gameManager").GetComponent<scoreCounter>();
 	}
 
     // Update is called once per frame
@@ -38,8 +38,11 @@ public class enemy : MonoBehaviour
 		}
 		else if (damageCounter <= 0.0f)
 		{
-			Attack();
-			damageCounter = 3.0f;
+			if (playerScript.isDead == false)
+			{
+				Attack();
+				damageCounter = 1.0f;
+			}
 		}
 	}
 
@@ -61,7 +64,7 @@ public class enemy : MonoBehaviour
 
 	void Die()
 	{
-		
+		scoreCounterRef.totalScore += score;
 		Debug.Log("enemy dead");
 		//Instantiate(deathEffect, transform.position, Quaternion.identity);
 		Destroy(gameObject);

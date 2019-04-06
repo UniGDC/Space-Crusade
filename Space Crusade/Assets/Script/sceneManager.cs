@@ -7,6 +7,11 @@ public class sceneManager : MonoBehaviour
 {
 	public void reloadLevel()
 	{
-		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 	}
+	public void nextLevel()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+	}
+	
 }

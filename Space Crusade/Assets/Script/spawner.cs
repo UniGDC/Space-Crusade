@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class spawner : MonoBehaviour
 {
+	public Player playerRef;
 
 	public GameObject[] spawnPoint;
 	public GameObject[] enemyObj;
@@ -12,6 +13,8 @@ public class spawner : MonoBehaviour
 	private int randomNum;
 
 	public int enemyNum;
+
+
 
 	public float timer = 10f;
 	public Text timerText;
@@ -33,13 +36,23 @@ public class spawner : MonoBehaviour
     {
 		
 		timerText.text = Mathf.RoundToInt(timer).ToString();
-		timer -= Time.deltaTime;
-		if (timer <= 0f)
+		if (playerRef.isDead == false)
 		{
-			StartCoroutine(spawnEnemy(enemyNum));
-			timer = timerRef;
-	
+			timer -= Time.deltaTime;
+			if (timer < 0.0f)
+			{
+				StartCoroutine(spawnEnemy(enemyNum));
+				timerText.gameObject.SetActive(false);
+				timer = timerRef;
+
+
+			}
 		}
+		else
+		{
+			Destroy(this);
+		}
+		
 		
     }
 
